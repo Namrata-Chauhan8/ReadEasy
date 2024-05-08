@@ -15,7 +15,6 @@ const Login = () => {
 
   const onSubmit = (data) => {
     const storedUserData = userData;
-
     if (
       storedUserData &&
       storedUserData.userData.email === data.email &&

@@ -33,7 +33,7 @@ const Cart = () => {
         return { ...book, quantity: updatedQuantity >= 0 ? updatedQuantity : 0 };
       }
       return book;
-    }).filter((book) => book.quantity > 0); // Filter out books with quantity > 0
+    }).filter((book) => book.quantity > 0); 
     setSelectedBooks(updatedBooks);
     localStorage.setItem("cart", JSON.stringify(updatedBooks));
   };
