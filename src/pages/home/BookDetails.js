@@ -12,6 +12,7 @@ import {
   Button,
 } from "@mui/material";
 import Navbar from "../../components/Navbar";
+import toast from "react-hot-toast";
 
 const BookDetails = () => {
   const navigate = useNavigate();
@@ -52,9 +53,7 @@ const BookDetails = () => {
       
       localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
-  
-    // Navigate to the cart page
-    navigate('/mycart');
+    toast.success("Book added to cart successfully");
   }
   
 

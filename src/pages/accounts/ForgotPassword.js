@@ -2,6 +2,7 @@ import { Button, Container, Grid, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react';
 import { useSignup } from '../../context/SignupContext';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ const ForgotPassword = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         userData.updateUser({ ...userData.userData, password: newPassword });
+        toast.success("Password changed successfully");
         navigate("/login");
     }
 

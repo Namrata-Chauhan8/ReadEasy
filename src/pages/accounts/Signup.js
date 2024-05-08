@@ -2,8 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Container, Typography, TextField, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useSignup } from "../../context/SignupContext";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const { updateUser } = useSignup();
@@ -17,7 +17,7 @@ const Signup = () => {
   const onSubmit = (data) => {
     updateUser(data);
     localStorage.setItem("user", JSON.stringify(data));
-    toast("Signup Successful");
+    toast.success("Signup Successful");
     navigate("/login");
   };
 

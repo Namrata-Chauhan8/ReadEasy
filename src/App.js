@@ -9,18 +9,15 @@ import Profile from "./components/Profile";
 import ForgotPassword from "./pages/accounts/ForgotPassword";
 import Cart from "./pages/home/Cart";
 import CheckOut from "./pages/home/CheckOut";
+import {Toaster} from 'react-hot-toast'
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));  
   return (
     <Router>
       <SignupProvider>
         <Routes>
           <Route path="/" element={<Signup />} />
-          <Route path="/login" element={<Login />} 
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn} />
+          <Route path="/login" element={<Login />}/>
           <Route path="/home" element={<Home />} />
           <Route path="/home/books/:id" element={<BookDetails />} />
           <Route path="/profile" element={<Profile />} />
@@ -28,6 +25,7 @@ const App = () => {
           <Route path="/mycart" element={<Cart />} />
           <Route path="/mycart/checkout" element={<CheckOut />} />
         </Routes>
+          <Toaster />
       </SignupProvider>
     </Router>
   );

@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Cart = () => {
   const navigate=useNavigate()
@@ -83,9 +84,11 @@ const Cart = () => {
     );
     setSelectedBooks(updatedBooks);
     localStorage.setItem("cart", JSON.stringify(updatedBooks));
+    toast.success("Item removed from cart successfully");
   };
 
   const handlePurchase = () => {
+    toast.success("Book purchased successfully...🥂");
     navigate("/mycart/checkout")
     localStorage.removeItem("cart")
   }
