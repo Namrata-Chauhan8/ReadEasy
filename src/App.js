@@ -8,6 +8,7 @@ import BookDetails from "./pages/home/BookDetails";
 import Profile from "./components/Profile";
 import ForgotPassword from "./pages/accounts/ForgotPassword";
 import Cart from "./pages/home/Cart";
+import CheckOut from "./pages/home/CheckOut";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login/forgotpassword" element={<ForgotPassword />} />
           <Route path="/mycart" element={<Cart />} />
+          <Route path="/mycart/checkout" element={<CheckOut />} />
         </Routes>
       </SignupProvider>
     </Router>
