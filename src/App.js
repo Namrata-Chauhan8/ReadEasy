@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { SignupProvider } from "./context/SignupContext";
 import Login from "./pages/accounts/Login";
@@ -11,12 +11,16 @@ import Cart from "./pages/home/Cart";
 import CheckOut from "./pages/home/CheckOut";
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));  
   return (
     <Router>
       <SignupProvider>
         <Routes>
           <Route path="/" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />} 
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn} />
           <Route path="/home" element={<Home />} />
           <Route path="/home/books/:id" element={<BookDetails />} />
           <Route path="/profile" element={<Profile />} />

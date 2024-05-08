@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Typography, TextField, Button, Grid } from "@mui/material";
 import { useSignup } from "../../context/SignupContext";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -20,6 +21,7 @@ const Login = () => {
       storedUserData.userData.email === data.email &&
       storedUserData.userData.password === data.password
     ) {
+      setIsLoggedIn(true);
       navigate("/home");
     } else {
       alert("Invalid email or password");
@@ -27,6 +29,9 @@ const Login = () => {
   };
 
   return (
+    <>
+    { !isLoggedIn ? (
+
     <Container
       maxWidth="sm"
       sx={{ mt: 8, backgroundColor: "white", padding: 4 }}
@@ -68,7 +73,14 @@ const Login = () => {
         </Grid>
         <NavLink to='/login/forgotpassword' style={{display: 'block', textAlign: 'center', marginTop: '10px'}}>Forgot Password?</NavLink>
       </form>
-    </Container>
+    </Container>) : (
+      <Container maxWidth="sm" sx={{ mt: 8, backgroundColor: "white", padding: 4 }}>
+        <Typography variant="h4" align="center" gutterBottom>
+          Please Signup/Login to continue...
+          </Typography>
+      </Container>
+    )}
+    </>
   );
 };
 
