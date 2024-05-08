@@ -17,18 +17,22 @@ const Login = () => {
 
   const onSubmit = (data) => {
     const storedUserData = userData;
-    if (
-      storedUserData &&
-      storedUserData.userData.email === data.email &&
-      storedUserData.userData.password === data.password
-    ) {
-      toast.success("Login successful");
-      localStorage.setItem("IsLoggedIn", true);
-      navigate("/home");
-    } else {
-      toast.error("Invalid email or password");
-    }
-  };
+    const userExist=localStorage.getItem("user")===null;
+    if (userExist) {
+      toast.error("Please Signup first");
+    }else{
+    if (storedUserData.userData){
+      if (storedUserData.userData.email === data.email &&
+        storedUserData.userData.password === data.password) {
+          toast.success("Login successful");
+          localStorage.setItem("IsLoggedIn", true);
+          navigate("/home");
+      }else {
+        toast.error("Invalid email or password");
+      }
+    }}}
+      
+   
 
   return (
     <>
@@ -97,6 +101,6 @@ const Login = () => {
       </Container>
     </>
   );
-};
+}
 
 export default Login;
