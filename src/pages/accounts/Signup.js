@@ -70,6 +70,12 @@ const Signup = () => {
             </Button>
           </Grid>
         </Grid>
+
+        <Grid item xs={12}>
+            <Button fullWidth variant="contained" color="primary" onClick={() => navigate("/login")} sx={{ marginTop: "10px" }}>
+              Already have an account? Login here
+            </Button>
+          </Grid>
       </form>
     </Container>
   );
