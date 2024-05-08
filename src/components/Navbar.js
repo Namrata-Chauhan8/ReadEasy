@@ -9,8 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("cart");
+    localStorage.clear();
     navigate("/");
   };
 

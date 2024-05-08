@@ -88,9 +88,15 @@ const Cart = () => {
   };
 
   const handlePurchase = () => {
-    toast.success("Book purchased successfully...🥂");
-    navigate("/mycart/checkout")
-    localStorage.removeItem("cart")
+    if (localStorage.getItem('IsLoggedIn') === 'true') {
+      
+      toast.success("Book purchased successfully...🥂");
+      navigate("/mycart/checkout")
+      localStorage.removeItem("cart")
+    }else{
+      toast.error("Please login first to purchase");
+      navigate("/login")
+    }
   }
 
   return (

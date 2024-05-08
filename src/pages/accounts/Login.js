@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Typography, TextField, Button, Grid } from "@mui/material";
 import { useSignup } from "../../context/SignupContext";
@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 
 const Login = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -23,6 +24,7 @@ const Login = () => {
       storedUserData.userData.password === data.password
     ) {
       toast.success("Login successful");
+      localStorage.setItem('IsLoggedIn', true);
       navigate("/home");
     } else {
       toast.error("Invalid email or password");
