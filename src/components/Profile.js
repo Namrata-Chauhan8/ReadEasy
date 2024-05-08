@@ -3,6 +3,7 @@ import { useSignup } from '../context/SignupContext';
 import { Button, Card, CardContent, CardHeader, Container, Grid, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
+import toast from 'react-hot-toast';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Profile = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    toast.success("Profile Updated successfully");
     navigate("/home");
   }
 

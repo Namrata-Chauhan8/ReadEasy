@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 
 
 const Login = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -24,7 +23,6 @@ const Login = () => {
       storedUserData.userData.password === data.password
     ) {
       toast.success("Login successful");
-      setIsLoggedIn(true);
       navigate("/home");
     } else {
       toast.error("Invalid email or password");
@@ -33,7 +31,7 @@ const Login = () => {
 
   return (
     <>
-    { !isLoggedIn ? (
+   
 
     <Container
       maxWidth="sm"
@@ -76,13 +74,9 @@ const Login = () => {
         </Grid>
         <NavLink to='/login/forgotpassword' style={{display: 'block', textAlign: 'center', marginTop: '10px'}}>Forgot Password?</NavLink>
       </form>
-    </Container>) : (
-      <Container maxWidth="sm" sx={{ mt: 8, backgroundColor: "white", padding: 4 }}>
-        <Typography variant="h4" align="center" gutterBottom>
-          Please Signup/Login to continue...
-          </Typography>
-      </Container>
-    )}
+    </Container>
+      
+   
     </>
   );
 };
