@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { SignupProvider } from "./context/SignupContext";
 import Login from "./pages/accounts/Login";

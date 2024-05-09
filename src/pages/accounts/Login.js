@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { Container, Typography, TextField, Button, Grid } from "@mui/material";
 import { useSignup } from "../../context/SignupContext";
@@ -6,7 +6,6 @@ import { NavLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
   const {
     register,
