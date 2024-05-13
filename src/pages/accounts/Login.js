@@ -4,6 +4,8 @@ import { Container, Typography, TextField, Button, Grid } from "@mui/material";
 import { useSignup } from "../../context/SignupContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../../redux/action/Action";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,24 +16,49 @@ const Login = () => {
   } = useForm();
   const userData = useSignup();
 
-  const onSubmit = (data) => {
-    const storedUserData = userData;
-    const userExist=localStorage.getItem("user")===null;
+  const dispatch = useDispatch();
+
+  //onsubmit without redux is given below
+
+  // const onSubmit = (data) => {
+  //   const storedUserData = userData;
+  //   const userExist=(localStorage.getItem("user")===null);
+  //   console.log(userExist);
+  //   if (userExist) {
+  //     toast.error("Please Signup first");
+  //   }else{
+  //   if (storedUserData.userData){
+  //     if (storedUserData.userData.email === data.email &&
+  //       storedUserData.userData.password === data.password) {
+  //         toast.success("Login successful");
+  //         localStorage.setItem("IsLoggedIn", true);
+  //         navigate("/home");
+  //     }else {
+  //       toast.error("Invalid Credentials");
+  //     }
+  //   }}}
+
+  //onsubmit with redux is given below
+  const onSubmit = async (data) => {
+    const userExist = localStorage.getItem("user") === null;
     if (userExist) {
       toast.error("Please Signup first");
-    }else{
-    if (storedUserData.userData){
-      if (storedUserData.userData.email === data.email &&
-        storedUserData.userData.password === data.password) {
-          toast.success("Login successful");
-          localStorage.setItem("IsLoggedIn", true);
-          navigate("/home");
-      }else {
-        toast.error("Invalid email or password");
+    } else {
+      const storedUserData = userData;
+      if (
+        storedUserData &&
+        storedUserData.userData.email === data.email &&
+        storedUserData.userData.password === data.password
+      ) {
+        dispatch(loginSuccess(data));
+        toast.success("Login Successful");
+        localStorage.setItem("IsLoggedIn", true);
+        navigate("/home");
+      } else {
+        toast.error("Invalid Credentials, Please try again.");
       }
-    }}}
-      
-   
+    }
+  };
 
   return (
     <>
@@ -54,6 +81,7 @@ const Login = () => {
                 {...register("email", { required: "Email is required" })}
                 error={Boolean(errors.email)}
                 helperText={errors.email ? errors.email.message : ""}
+                required
               />
             </Grid>
             <Grid item xs={12}>
@@ -66,6 +94,7 @@ const Login = () => {
                 {...register("password", { required: "Password is required" })}
                 error={Boolean(errors.password)}
                 helperText={errors.password ? errors.password.message : ""}
+                required
               />
             </Grid>
             <Grid item xs={12}>
@@ -100,6 +129,6 @@ const Login = () => {
       </Container>
     </>
   );
-}
+};
 
 export default Login;

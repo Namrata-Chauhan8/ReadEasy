@@ -4,6 +4,8 @@ import { Container, Typography, TextField, Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../../context/SignupContext";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { signupSuccess } from "../../redux/action/Action";
 
 const Signup = () => {
   const { updateUser } = useSignup();
@@ -14,13 +16,25 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    updateUser(data);
-    localStorage.setItem("user", JSON.stringify(data));
-    toast.success("Signup Successful");
-    navigate("/login");
+  // const onSubmit = (data) => {
+  //   updateUser(data);
+  //   localStorage.setItem("user", JSON.stringify(data));
+  //   toast.success("Signup Successful");
+  //   navigate("/login");
+  // };
+  
+  const dispatch = useDispatch();
+  const onSubmit = async (data) => {
+    try {
+     await updateUser(data);
+      dispatch(signupSuccess(data));
+      localStorage.setItem("user", JSON.stringify(data));
+      toast.success("Signup Successful");
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
   };
-
   return (
     <Container maxWidth="sm" sx={{ mt: 8, backgroundColor: "white", padding: 4 }}>
       <Typography variant="h4" align="center" gutterBottom>

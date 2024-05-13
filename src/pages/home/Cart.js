@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const Cart = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [selectedBooks, setSelectedBooks] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
@@ -36,7 +36,7 @@ const Cart = () => {
     }
     let total = 0;
     selectedBooks.forEach((book) => {
-      total += (50) * (book.quantity);
+      total += 50 * book.quantity;
     });
     return total;
   };
@@ -88,16 +88,18 @@ const Cart = () => {
   };
 
   const handlePurchase = () => {
-    if (localStorage.getItem('IsLoggedIn') === 'true') {
-      
+    if (localStorage.getItem("user") === null) {
+      toast.error("Please create an account to purchase!!!");
+      navigate("/");
+    } else if (localStorage.getItem("IsLoggedIn") === "true") {
       toast.success("Book purchased successfully...🥂");
-      navigate("/mycart/checkout")
-      localStorage.removeItem("cart")
-    }else{
+      navigate("/mycart/checkout");
+      localStorage.removeItem("cart");
+    } else {
       toast.error("Please login first to purchase");
-      navigate("/login")
+      navigate("/login");
     }
-  }
+  };
 
   return (
     <>
@@ -231,7 +233,9 @@ const Cart = () => {
             </Table>
           </TableContainer>
           <Typography margin={2}>Total Bill: ${totalBill}</Typography>
-          <Button variant="contained" onClick={handlePurchase}>Buy Now</Button>
+          <Button variant="contained" onClick={handlePurchase}>
+            Buy Now
+          </Button>
         </DialogContent>
       </Dialog>
     </>
